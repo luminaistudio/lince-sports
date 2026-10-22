@@ -15,7 +15,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
     if (error || !data) return Response.json({ error: "Falha ao ler os arquivos do kit." }, { status: 502 });
     zip.file(path.split("/").pop()!, await data.arrayBuffer());
   }
-  const body = await zip.generateAsync({ type: "uint8array", compression: "DEFLATE" });
+  const body = await zip.generateAsync({ type: "arraybuffer", compression: "DEFLATE" });
 
   const h = req.headers;
   const visitor = createHash("sha256").update((h.get("x-forwarded-for") ?? "") + (h.get("user-agent") ?? "")).digest("hex");
