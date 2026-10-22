@@ -1,5 +1,5 @@
 import { pub, ini, type Kit } from "@/lib/supabase";
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 export default async function Home() {
   const { data } = await pub().from("kits").select("*").order("created_at", { ascending: false });
   const kits = (data ?? []) as Kit[];
